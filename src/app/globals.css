@@ -109,3 +109,11 @@
 .double-point::before {
   right: 0;
 }
+
+
+.swiper-pagination-bullet-active{
+  color: white;
+}
+.swiper-pagination-bullet:hover{
+  cursor: pointer;
+}

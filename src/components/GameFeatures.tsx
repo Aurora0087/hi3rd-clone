@@ -7,19 +7,27 @@ import React, { useEffect, useState } from 'react'
 const features = [
     {
         fid: 0,
-        vId: "/videos/exp-w.mp4"
+        vId: "/videos/exp-w.mp4",
+        title: "Mars Crisis, a New Chapter in the Honkai Adventure",
+        des:"Caution! The Sea of Data is slowly taking over space! The tranquil daily life has been disrupted. What secrets are hidden in this city? Embark on a thrilling adventure, admire the Anchor of the Apocalypse, and explore a variety of civilizations in different bubble universes!",
     },
     {
         fid: 1,
-        vId: "/videos/comb.mp4"
+        vId: "/videos/comb.mp4",
+        title: "Adrenaline-Pumping Synergy, Fight Three-Dimensionally Like Never Before",
+        des:"Three-dimensional scenes, jumping mechanisms, and a brand-new Astral Ring system bring a more immersive experience in three-dimensional space. Watch out for monsters with their own ecology, and deal with them carefully when venturing into their territory. Unite and fight together for all that's beautiful.",
     },
     {
         fid: 2,
-        vId: "/videos/world.mp4"
+        vId: "/videos/world.mp4",
+        title: "Ultimate Graphics, Play an Immersive Animation Movie",
+        des:"Meticulous attention to details like light, shadow, and textures creates a vibrant and cinematic beauty. Roam freely in the new open environments, get lost in the immersive storyline, and experience the allure of next-generation visual quality!",
     },
     {
         fid: 3,
-        vId: "/videos/character.mp4"
+        vId: "/videos/character.mp4",
+        title: "Brand New Team, Join Them on an Alien Planet to Seek Dreams",
+        des:`Who's the mysterious girl appearing in the Sea of Data? A sassy and humorous "elementary school student" with animal ears? Plus, a disciplined team leader leading the Schicksal Valkyries... Rally on Mars! Join the girls on this dreamseeking journey!`,
     }
 ]
 
@@ -28,12 +36,10 @@ function GameFeatures() {
     const [videoUrl, setVideoUrl] = useState("/videos/exp-w.mp4")
 
     function clickFutherButton(value: number) {
-        if (value === -1 && featurNum === 0) {
-            setFeaturNum(3)
-            return
-        }
-        setFeaturNum((featurNum) => (((featurNum + value) % 4)))
+        setFeaturNum((featurNum) => (((featurNum + value + features.length) % features.length)))
     }
+
+    
     useEffect(() => {
         function changeVideo() {
             setVideoUrl(() => (features[featurNum].vId))
@@ -43,7 +49,7 @@ function GameFeatures() {
     }, [featurNum])
     return (
         <div className=' relative min-h-screen w-full overflow-hidden snap-start'>
-            <div className=' absolute z-10 grid place-content-center w-full'>
+            <div key={featurNum} className=' absolute z-10 grid place-content-center w-full'>
                 <video poster={videoUrl} src={videoUrl} autoPlay muted loop className='object-cover w-full h-screen lg:h-full pointer-events-none'></video>
             </div>
             <div className=' absolute bottom-0 w-full h-screen z-[999]'>
@@ -53,31 +59,31 @@ function GameFeatures() {
                 <div className='mt-[8vh] h-4'>
                     <Image src="/icon/game-feather-title.png" alt='' width={10000} height={10000} className=' object-cover w-full' />
                 </div>
-                <div className='mb-[8vh] w-screen text-white px-[5vw] flex justify-between'>
+                <div className='mb-[8vh] w-screen text-white px-[5vw] grid grid-flow-col gap-4'>
                     <div className='relative'>
                         <motion.div
-                            className=' absolute top-4 left-[-0.5rem] rounded-md bg-blue-500 w-1 h-10'
+                            className=' absolute top-4 left-[-0.5rem] rounded-md bg-blue-500 w-[.125rem] h-10'
                             initial={{ opacity: 0, y: -20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{
                                 duration: 1
                             }}
                         ></motion.div>
-                        <div key={featurNum} className=' overflow-hidden'>
+                        <div key={featurNum} className=' overflow-hidden pl-4'>
                             <motion.h3
                                 initial={{ opacity: 0, x: -50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{
                                     duration: .5
                                 }}
-                                className=' font-bold text-2xl mb-2 text-wrap'>Mars Crisis, a New Chapter in the Honkai Adventure</motion.h3>
+                                className=' font-bold text-xl mb-2 text-wrap'>{features[featurNum].title}</motion.h3>
                             <motion.p
                                 initial={{ opacity: 0, x: 50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{
                                     duration: .5
                                 }}
-                                className=' text-xs text-slate-400 text-wrap'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque distinctio aliquam perferendis ipsam sunt voluptas nobis eveniet dolorum quo assumenda numquam sint, culpa facere dolore.</motion.p>
+                                className=' text-xs text-slate-400 text-wrap'>{features[featurNum].des}</motion.p>
                         </div>
 
                     </div>
@@ -85,7 +91,7 @@ function GameFeatures() {
                         <div className=' flex items-end gap-2 relative w-full'>
                             {features.map((feather) => (
                                 <div key={feather.fid}>
-                                    <span className={`${feather.fid === featurNum ? " text-white" : " text-slate-500/80"} font-bold`}>0{feather.fid + 1}</span>
+                                    <span onClick={()=>setFeaturNum(feather.fid)} className={`${feather.fid === featurNum ? " text-white" : " text-slate-500/80"} font-bold hover:cursor-pointer`}>0{feather.fid + 1}</span>
                                 </div>
                             ))}
                             <div className='absolute overflow-hidden bottom-0 rounded-md bg-slate-500/60 w-full'>

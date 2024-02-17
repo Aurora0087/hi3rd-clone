@@ -21,7 +21,7 @@ function Herob() {
   return (
     <section className='flex flex-col w-full'>
       <div className='w-full grid place-content-center text-center'>
-        <div className=' relative h-fit w-full flex flex-col'>
+        <div className=' relative h-fit w-full flex flex-col justify-center items-center'>
           <svg width="20ch" height="4rem" viewBox="0 0 270 77" xmlns="http://www.w3.org/2000/svg" className="bottom-0 z-[99] left-[30%]">
             {/*<path d="M10 10 V67" stroke="#FFA726" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="left" style={{ strokeDasharray: 57, strokeDashoffset: dashOffset, transition: 'stroke-dashoffset 300ms ease-in-out 0s' }}></path>
             <path d="M10 67 H260" stroke="#FFA726" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="bottom" style={{ strokeDasharray: 250, strokeDashoffset: dashOffset, transition: 'stroke-dashoffset 300ms ease-in-out 0s' }}></path>
